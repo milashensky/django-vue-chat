@@ -61,18 +61,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chatapp.wsgi.application'
 
-
+DATABASE_NAME = os.environ.get('POSTGRES_DATABASE', 'chat')
+DATABASE_USER = os.environ.get('POSTGRES_USER', 'chat')
+DATABASE_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'chat')
+DATABASE_HOST = os.environ.get('POSTGRES_PORT_5432_TCP_ADDR', '127.0.0.1')
+DATABASE_PORT = os.environ.get('POSTGRES_PORT_5432_TCP_PORT', '5432')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'chat',
-        'USER': 'chat',
-        'PASSWORD': 'chat',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+        'HOST': DATABASE_HOST,
+        'PORT': DATABASE_PORT,
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {

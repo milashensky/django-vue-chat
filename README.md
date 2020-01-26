@@ -15,3 +15,11 @@ and starting of ws chat service
 ```
 ptyhon ./manage.py ws_chat
 ```
+
+
+Also you can run app with docker-compose
+
+```
+docker-compose build
+docker-compose up
+```
