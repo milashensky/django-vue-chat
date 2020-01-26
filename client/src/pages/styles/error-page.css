@@ -1,0 +1,10 @@
+.error-page {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error-page h1 {
+    font-size: 100px;
+}
