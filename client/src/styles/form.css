@@ -6,15 +6,15 @@
     box-shadow: 0 0 50px 0 #d0d0d0;
     text-align: center;
 }
-.form-container > form {
+form {
     display: flex;
     padding: 20px 0;
     flex-flow: column;
     text-align: start;
 }
-.form-container > form > * {
+form > * {
     margin: 15px 0;
 }
-.form-container .error {
+form .error {
     color: red;
 }

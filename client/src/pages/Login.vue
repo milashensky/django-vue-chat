@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import AuthCntroller from './AuthController'
+import FormMixin from '@/components/mixins/FormMixin.js'
 import resource from '@/utils/resource.js'
 
 
 export default {
-    mixins: [AuthCntroller],
+    mixins: [FormMixin],
     computed: {
         resource () {
-            return resource.Login
+            return resource.Login.post
         }
     },
     methods: {
@@ -42,5 +42,5 @@ export default {
 }
 </script>
 
-<style src="./styles/form.css" scoped/>
-<style src="./styles/buttons.css" scoped/>
+<style src="@/styles/form.css" scoped/>
+<style src="@/styles/buttons.css" scoped/>

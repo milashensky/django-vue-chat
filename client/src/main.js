@@ -6,13 +6,16 @@ import router from './router'
 import { EventBus } from '@/utils/event-bus.js'
 import { toggle } from '@/utils/directives'
 import { buildNiceDateTime } from '@/utils/time'
+import toastr from 'mini-toastr'
 
 
 Vue.config.productionTip = false
 Vue.directive('toggle', toggle)
 Vue.filter('toNiceDateTime', buildNiceDateTime)
 
+toastr.init()
 
+window.alert = toastr.info
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

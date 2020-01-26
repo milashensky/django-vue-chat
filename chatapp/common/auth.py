@@ -1,8 +1,8 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 
 from common.mixins import CsrfExemptMixin, SerializedView
+from common.forms import UserCreationForm
 
 
 class LoginApi(SerializedView):
@@ -31,8 +31,6 @@ class RegistrationApi(SerializedView):
         form = UserCreationForm(self.data)
         if form.is_valid():
             user = form.save()
-            user.email = self.data.get('email')
-            user.save()
             login(self.request, user)
             return {'id': user.id}
         self.status = 400

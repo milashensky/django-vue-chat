@@ -29,9 +29,8 @@ export default {
         },
         submit () {
             if (this.validate())
-                this.resource.post(this.form).then(resp => {
-                    EventBus.$emit('context:updated', {id: resp.id})
-                    EventBus.$emit('context:update')
+                this.resource(this.form).then(resp => {
+                    this.success(resp)
                 }).catch(resp => {
                     if (resp.status == 400) {
                         resp.json().then(data => {
@@ -39,6 +38,10 @@ export default {
                         })
                     }
                 })
+        },
+        success (resp) {
+            EventBus.$emit('context:updated', {id: resp.id})
+            EventBus.$emit('context:update')
         }
     }
 }

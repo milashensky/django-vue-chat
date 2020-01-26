@@ -11,7 +11,10 @@
                 <router-link :to="{ name: 'Profile' }">Profile</router-link>
             </li>
             <li>
-                <router-link :to="{ name: 'Chat' }">Chat</router-link>
+                <router-link :to="{ name: 'Chat' }">
+                    Chat
+                    <span class="badge" v-show="props.unreaded">{{ props.unreaded }}</span>
+                </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'Users' }">Users</router-link>
@@ -23,6 +26,7 @@
     </div>
 </template>
 
+<style src="@/styles/badge.css" scoped/>
 <style scoped>
 .nav {
     display: flex;

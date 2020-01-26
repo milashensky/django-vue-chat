@@ -1,5 +1,7 @@
-from common.mixins import SerializedView, AuthRequierdMixin
 from django.contrib.auth.models import User
+
+from common.mixins import SerializedView, AuthRequierdMixin
+from common.forms import UserChangeForm
 
 
 class ContextApi(SerializedView):
@@ -26,3 +28,14 @@ class Users(AuthRequierdMixin, SerializedView):
         current = page * per_page
         qs = User.objects.all().exclude(id=request.user.id)
         return {'users': self.serialize_items(qs[current:current + per_page], self.fields), 'count': qs.count()}
+
+
+class Profile(AuthRequierdMixin, SerializedView):
+
+    def put(self, request):
+        form = UserChangeForm(self.data, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            return {'id': user.id}
+        self.status = 400
+        return {'errors': form.errors}

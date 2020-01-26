@@ -1,6 +1,6 @@
 from django.urls import path
 
-from common.api import ContextApi, Users
+from common.api import ContextApi, Users, Profile
 from common.auth import LoginApi, LogoutApi, RegistrationApi
 
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout', LogoutApi.as_view()),
     path('registration', RegistrationApi.as_view()),
     path('users', Users.as_view()),
+    path('profile', Profile.as_view()),
 ]

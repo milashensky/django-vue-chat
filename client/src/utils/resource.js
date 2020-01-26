@@ -19,7 +19,7 @@ function resource (url, data, method = 'GET', options = {}) {
     return new Promise((resolve, reject) => {
         let opts = {
             method,
-            'X-CSRFToken': getCookie('csrftoken')
+            ...options
         }
         if (data) {
             if (method.toLowerCase() !== 'get')
@@ -27,7 +27,10 @@ function resource (url, data, method = 'GET', options = {}) {
             else
                 url += '?' + encodeGetParams(data)
         }
-        fetch(url, Object.assign({}, defaultOptions, opts, options))
+        opts = Object.assign({}, defaultOptions, opts)
+        if (method !== 'GET')
+            opts.headers['X-CSRFToken'] = getCookie('csrftoken')
+        fetch(url, opts)
             .then(resp => {
                 switch (resp.status) {
                 case 200:
@@ -48,8 +51,8 @@ function resource (url, data, method = 'GET', options = {}) {
 
 export default {
     Context: {
-        get (data, options = {}) {
-            return resource(apiUrl + 'common/context', data, 'GET', options)
+        get (data) {
+            return resource(apiUrl + 'common/context', data, 'GET')
         }
     },
     Login: {
@@ -67,9 +70,14 @@ export default {
             return resource(apiUrl + 'common/registration', data, 'POST')
         }
     },
+    Profile: {
+        put (data) {
+            return resource(apiUrl + 'common/profile', data, 'PUT')
+        }
+    },
     Users: {
-        get (data, options = {}) {
-            return resource(apiUrl + 'common/users', data, 'GET', options)
+        get (data) {
+            return resource(apiUrl + 'common/users', data, 'GET')
         }
     }
 }

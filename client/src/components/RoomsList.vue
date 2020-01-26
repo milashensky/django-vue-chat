@@ -10,7 +10,7 @@
             </div>
             <div class="right-block">
                 <span class="last-message-time">{{ room.last_message_at | toNiceDateTime }}</span>
-                <span class="unreaded" v-if="room.messages_unread">{{ room.messages_unread }}</span>
+                <span class="badge" v-if="room.messages_unread">{{ room.messages_unread }}</span>
             </div>
         </router-link>
         <div class="" v-if="!props.rooms.length">
@@ -30,6 +30,7 @@ export default {
 }
 </script>
 
+<style src="@/styles/badge.css" scoped/>
 <style lang="css" scoped>
 .rooms {
     overflow-y: auto;
@@ -84,17 +85,5 @@ export default {
 }
 .room-card .last-message-time {
     display: block;
-}
-.room-card .unreaded {
-    color: white;
-    background-color: red;
-    border-radius: 25px;
-    display: inline-flex;
-    padding: 2px 5px;
-    font-size: 12px;
-    min-width: 18px;
-    min-height: 18px;
-    text-align: center;
-    justify-content: center;
 }
 </style>

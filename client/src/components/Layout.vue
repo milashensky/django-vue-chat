@@ -1,21 +1,27 @@
 <template>
     <div class="layout" v-if="context.loaded && context.id">
-        <v-nav/>
+        <v-nav :unreaded="unreaded"/>
         <main>
-            <router-view/>
+            <router-view :rooms="rooms"/>
         </main>
     </div>
 </template>
 
 <script>
 import ContextWatch from '@/components/mixins/ContextWatch.js'
+import ChatRoomsMixin from '@/components/mixins/ChatRoomsMixin'
 import VNav from './VNav'
 import { EventBus } from '@/utils/event-bus.js'
 
 export default {
-    mixins: [ContextWatch],
+    mixins: [ContextWatch, ChatRoomsMixin],
     components: {
         VNav
+    },
+    computed: {
+        unreaded () {
+            return this.rooms.reduce((unreaded, room) => unreaded + room.messages_unread, 0)
+        }
     },
     methods: {
         checkLogin () {

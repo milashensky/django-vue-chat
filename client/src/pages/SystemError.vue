@@ -4,4 +4,4 @@
     </div>
 </template>
 
-<style src="./styles/error-page.css" scoped/>
+<style src="@/styles/error-page.css" scoped/>
